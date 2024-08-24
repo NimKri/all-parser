@@ -36,12 +36,12 @@ def output_checks(output, force):
 sys.excepthook = exception_handler
 
 @click.command()
-@click.option('-i', '--input', required=True,
+@click.option('-f', '--file', required=True,
               help=f'Path to the file to parse.'
                    f'Supported file types are {supported_extensions}. '
                    f'If no extension is specified, the parser will try to '
                    f'parse the file with all supported types.')
-@click.option('-t', '--type', default=None,
+@click.option('-e', '--ext', default=None,
               help='File type of the provided input,'
                    'this overrides the file type from extension.')
 @click.option('-o', '--output', default=None,
@@ -54,12 +54,12 @@ sys.excepthook = exception_handler
                                                   ' overwrite the output '
                                                   'file, if exists. And will '
                                                   'also force parsing.')
-@click.option('-v','--verbose', is_flag=True, help='Verbose mode.')
-def parse(input, type, output, silent, force, verbose):
+@click.option('-v','--verbose', is_flag=True, default=False, help='Verbose mode.')
+def parse(file, ext, output, silent, force, verbose):
     # Start parsing
-    LOG.info(f"Parsing file {input}")
+    LOG.info(f"Parsing file {file}")
 
-    allparser = allparse.AllParse(input, type)
+    allparser = allparse.AllParse(file, ext, verbose)
 
     if output:
         output_checks(output, force)
