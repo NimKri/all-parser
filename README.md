@@ -6,5 +6,5 @@ This package aims to parse every available format and provides underlying output
 
 You can install the package using pip:
 
-```bash
-pip install all_parser
+```bash```
+pip install all-parser
